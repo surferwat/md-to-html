@@ -11,6 +11,8 @@ using namespace surferwat_htmlline;
 using namespace surferwat_html;
 using namespace surferwat_exception;
 
+const string TARGET_EXT = ".md";
+
 void isMarkdownFile(string fileName) throw (Exception);
 void changeExt(string& targetFileName, string sourceFileName, string sourceExt);
 void writerFile(string writeFileName, ofstream& writeFile) throw (Exception);
@@ -34,8 +36,8 @@ int main(int argc, char* argv[]) {
     try {
         isMarkdownFile(readFileName);
         
-        assert(readFileName.substr(readFileName.length() - 3, string::npos) == ".md");
-        changeExt(writeFileName, readFileName, ".md");
+        assert(readFileName.substr(readFileName.length() - TARGET_EXT.length(), string::npos) == TARGET_EXT);
+        changeExt(writeFileName, readFileName, TARGET_EXT);
 
         writerFile(writeFileName, writeFile);
 
@@ -66,10 +68,9 @@ int main(int argc, char* argv[]) {
 
 
 void isMarkdownFile(string fileName) throw (Exception) {
-    string targetExt = ".md";
-    string ext = fileName.substr(fileName.length() - targetExt.length(), string::npos);
+    string ext = fileName.substr(fileName.length() - TARGET_EXT.length(), string::npos);
 
-    if (ext != targetExt) {
+    if (ext != TARGET_EXT) {
         throw Exception("invalid file type");
     }
 }
