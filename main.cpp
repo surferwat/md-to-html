@@ -47,13 +47,13 @@ int main(int argc, char* argv[]) {
 
         generateHtml(lines, writeFileName, writeFile);
     } catch (Exception& e) {
-        cout << e.what() << endl;
+        cerr << e.what() << endl;
         exit(0);
     } catch (HtmlLine::invalidArgError& e) {
-        cout << e.what() << endl;
+        cerr << e.what() << endl;
         exit(0);
     } catch (...) {
-        cout << "unexplained exception.\n";
+        cerr << "unexplained exception.\n";
         exit(0);
     }
     
